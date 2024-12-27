@@ -1,19 +1,25 @@
-import React from 'react'
+import React from "react";
+import { useUserContext } from "../context/userContext";
+import './Header.css';
 
 const Header = () => {
-    const user ="Guest";
-  return (
-    <div className='ui fixed menu'>
-        <div className='ui conainer center'>
-            <h2> react ContextApi</h2>
-            <div className='profile'>
-                <h3>Welcome, {user}</h3>
-  
-            </div>
-        </div>
-      
-    </div>
-  )
-}
+  const { user, logOut } = useUserContext();
 
-export default Header
+  return (
+    <div className="header-container">
+      <div className="header-content">
+        <h2 className="app-title">React ContextApi</h2>
+        <div className="profile">
+          <h3 className="username">Welcome, {user.name}</h3>
+          {!user.isGuestUser && (
+            <button className="logout-btn" onClick={logOut}>
+              LogOut
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Header;
